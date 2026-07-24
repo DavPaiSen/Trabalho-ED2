@@ -47,6 +47,7 @@ int main() {
 
         case 3://busca em profundidade
             
+            break;
         
         default:
             printf("Entrada invalida!\n");
