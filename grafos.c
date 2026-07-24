@@ -16,6 +16,25 @@ Grafo criaGrafo(int vertices, int arestas) {
     return novo;
 }
 
+void desalocaGrafo(Grafo* g) {
+    if (!g) {//nao continua se g ja nao estiver alocado
+        return;
+    }
+
+    for (int i = 0; i < g->V; i++) {
+        No* percorre = g->lista[i];
+        No* proximo;
+        while (percorre) {
+            proximo = percorre->prox;
+            free(percorre);
+            percorre = proximo;
+        }
+    }//aqui as listas encadeadas dentro de lista ja estao desalocadas
+
+    free(g->lista);
+    free(g);
+}
+
 void adicionaAresta(Grafo* g, int origem, int destino, int peso) {
     No* aresta = malloc(sizeof(No));
     aresta->destino = destino;
@@ -40,6 +59,7 @@ Grafo* grafoDoArquivo(char* nomeArquivo) {
 
     if (!fgets(buffer, TAMANHO_BUFFER, arquivo)) {
         printf("Erro ao ler o arquivo!\n");
+        fclose(arquivo);
         return NULL;
     }
 
@@ -64,4 +84,23 @@ Grafo* grafoDoArquivo(char* nomeArquivo) {
     
     fclose(arquivo);
     return novo;
+}
+
+void mostrarGrafo(Grafo* g) {
+    if (!g) {
+        printf("O grafo e nulo!\n");
+        return;
+    }
+
+    No* percorre;
+    for (int i = 0; i < g->V; i++) {
+        printf("Arestas divergentes do vertice %d convergem em: ", i);
+        percorre = g->lista[i];
+
+        while(percorre) {
+            printf("%d(peso: %d) ", percorre->destino, percorre->peso);
+            percorre = percorre->prox;
+        }
+        printf("\n");
+    }
 }
