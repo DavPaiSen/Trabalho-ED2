@@ -46,7 +46,16 @@ int main() {
             break;
 
         case 3://busca em profundidade
-            
+            printf("1-recursiva\n2-iterativa\n");
+            int escolha;
+            scanf("%d", &escolha);
+            if (escolha == 1) {
+                printf("Numero de componentes conexas: %d\n", buscaProfundidadeRecursiva(g));
+            } else if (escolha == 2) {
+                printf("Numero de componentes conexas: %d\n", buscaProfundidadeIteratira(g));
+            } else {
+                printf("Entrada invalida!\n");
+            }
             break;
         
         default:

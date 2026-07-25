@@ -26,4 +26,6 @@ Grafo* grafoDoArquivo(char* nomeArquivo);
 
 void mostrarGrafo(Grafo* g);
 
+int degMais(Grafo* g, int n);
+
 #endif

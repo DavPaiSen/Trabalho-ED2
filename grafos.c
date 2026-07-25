@@ -104,3 +104,13 @@ void mostrarGrafo(Grafo* g) {
         printf("\n");
     }
 }
+
+int degMais(Grafo* g, int n) { //deg+ de um vertice, numero de arestas divergentes desse vertice
+    int deg = 0;
+    No* atual = g->lista[n];
+    while (atual) {
+        deg++;
+        atual = atual->prox;
+    }
+    return deg;
+}

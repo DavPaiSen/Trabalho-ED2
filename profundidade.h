@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void buscaProfundidadeRecursiva(Grafo* g);
-void buscaProfundidadeIteratira(Grafo* g);
+int buscaProfundidadeRecursiva(Grafo* g);
+int buscaProfundidadeIteratira(Grafo* g);
 
 #endif
