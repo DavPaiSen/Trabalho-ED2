@@ -39,8 +39,70 @@ int buscaProfundidadeRecursiva(Grafo* g) { //retorna o numero de componentes con
     free(visitado);
 }
 
+typedef struct {
+    int* elementos;
+    int topo;
+    int capacidade;
+} Pilha;
 
+Pilha* criaPilha(int capacidade) {
+    Pilha* nova = malloc(sizeof(Pilha));
+    nova->elementos = malloc(sizeof(int) * capacidade);
+    nova->capacidade = capacidade;
+    nova->topo = -1;
+    return nova;
+}
+
+void push(Pilha* p, int valor) {
+    p->elementos[++(p->topo)] = valor;
+}
+
+int pop(Pilha* p) {
+    return p->elementos[p->topo--];
+}
+
+void liberaPilha(Pilha* p) {
+    free(p->elementos);
+    free(p);
+}
 
 int buscaProfundidadeIteratira(Grafo* g) {
+    if (!g) {
+        printf("Grafo nulo!!\n");
+        return -1;
+    }
 
+    int* visitado = calloc(g->V, sizeof(int));
+    Pilha* p = criaPilha(g->V);
+    int componentesConexas = 0;
+
+    for (int i = 0; i < g->V; i++) {
+        if (!visitado[i]) {
+            componentesConexas++;
+
+            push(p, i);
+
+            while(p->topo != -1) {//enquanto tiver alguma coisa na pilha
+                int visitar = pop(p);
+
+                if (!visitado[visitar]) {
+                    visitado[visitar] = 1;
+                    printf("%d ", visitar);
+
+                    No* atual = g->lista[visitar];
+                    while (atual) {
+                        int vizinho = atual->destino;
+                        if (!visitado[vizinho]) {
+                            push(p, vizinho);
+                        }
+                        atual = atual->prox;
+                        //vai ver se os vizinhos do i ja foram visitados, se nao, coloca eles na pilha para serem visitados
+                    }
+                }
+            }
+        }
+    }
+    printf("\n");
+    free(visitado);
+    liberaPilha(p);
 }

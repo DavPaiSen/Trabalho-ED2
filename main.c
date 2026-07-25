@@ -58,10 +58,18 @@ int main() {
             }
             break;
         
+        case 4:
+            
+
+        case 9:
+            break;
+
         default:
             printf("Entrada invalida!\n");
             break;
         }
     }
+
+    desalocaGrafo(g);
     
 }
