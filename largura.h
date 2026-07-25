@@ -4,17 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "grafos.h"
-
-struct no {
-    int valor;
-    struct no* proximo;
-};
-
-typedef struct {
-    int tamanho;
-    struct no* comeco;
-    struct no* fim;
-} Fila;
+#include "filas.h"
 
 void buscaEmLargura(Grafo* g);
 

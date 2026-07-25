@@ -104,3 +104,51 @@ void mostrarGrafo(Grafo* g) {
         printf("\n");
     }
 }
+
+int degMais(int vertice, Grafo* g) {//qtd de arestas divergentes de um vertice 
+    if (!g) {
+        printf("Grafo nulo!\n");
+        return -1;
+    }
+
+    if (vertice < 0 || vertice >= g->V) {
+        printf("Vertice invalido!\n");
+        return -1;
+    }
+    
+    int retorno = 0;
+
+    No* percorre = g->lista[vertice];
+
+    while (percorre) {
+        retorno++;
+        percorre = percorre->prox;
+    }
+
+    return retorno;
+}
+
+int degMenos(int vertice, Grafo* g) {//qtd de arestas convergentes de um vertice
+    if (!g) {
+        printf("Grafo nulo!\n");
+        return -1;
+    }
+
+    if (vertice < 0 || vertice >= g->V) {
+        printf("Vertice invalido!\n");
+        return -1;
+    }
+    int retorno = 0;
+    No* percorre;
+
+    for(int i = 0; i < g->V; i++) {
+        percorre = g->lista[i];
+        while (percorre) {
+            if (percorre->destino == vertice) {
+                retorno++;
+            }
+            percorre = percorre->prox;
+        }
+    }
+    return retorno;
+}

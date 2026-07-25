@@ -3,6 +3,7 @@
 #include "grafos.h"
 #include "profundidade.h"
 #include "largura.h"
+#include "topologica.h"
 
 int main() {
     Grafo* g = NULL;
@@ -72,6 +73,9 @@ int main() {
             }
             break;
             
+        case 5://TODO: detectar ciclo se der tempo
+            ordemTopologica(g);
+            break;
 
         case 9:
             break;
