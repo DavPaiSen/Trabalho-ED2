@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "grafos.h"
 #include "profundidade.h"
+#include "largura.h"
 
 int main() {
     Grafo* g = NULL;
@@ -47,7 +48,6 @@ int main() {
 
         case 3://busca em profundidade
             printf("1-recursiva\n2-iterativa\n");
-            int escolha;
             scanf("%d", &escolha);
             if (escolha == 1) {
                 printf("Numero de componentes conexas: %d\n", buscaProfundidadeRecursiva(g));
@@ -59,6 +59,18 @@ int main() {
             break;
         
         case 4:
+            printf("1-busca em largura\n2-distancia a partir de um vertice origem\n");
+            scanf("%d", &escolha);
+            if (escolha == 1) {
+                buscaEmLargura(g);
+            } else if (escolha == 2) {
+                printf("Distancia do vertice: ");
+                scanf("%d", &escolha);
+                distanciaDoVertice(g, escolha);
+            } else {
+                printf("Entrada invalida!\n");
+            }
+            break;
             
 
         case 9:
