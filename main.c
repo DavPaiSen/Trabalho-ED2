@@ -4,6 +4,7 @@
 #include "profundidade.h"
 #include "largura.h"
 #include "topologica.h"
+#include "prim.h"
 
 int main() {
     Grafo* g = NULL;
@@ -75,6 +76,18 @@ int main() {
             
         case 5://TODO: detectar ciclo se der tempo
             ordemTopologica(g);
+            break;
+
+        case 6:
+            printf("Peso total da arvore: %d\n\n", prim(g));
+            break;
+        
+        case 7:
+
+            break;
+        
+        case 8:
+
             break;
 
         case 9:

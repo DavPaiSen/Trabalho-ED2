@@ -3,7 +3,7 @@
 //assumindo aqui que o grafo e aciclico!!!!!!!!!
 void ordemTopologica(Grafo* g) { //algoritmo de Kahn
     Fila* fila = iniciaFila();
-    int t = 1;
+    int t = 0;
     int* ordem = malloc(sizeof(int) * g->V);
     int* deg = malloc(sizeof(int) * g->V);//deg-
 
