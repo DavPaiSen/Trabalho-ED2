@@ -44,6 +44,7 @@ void adicionaAresta(Grafo* g, int origem, int destino, int peso) {
 
     aresta->prox = g->lista[origem];
     g->lista[origem] = aresta;
+    g->A++;
 }
 
 Grafo* grafoDoArquivo(char* nomeArquivo) {

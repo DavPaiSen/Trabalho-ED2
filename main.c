@@ -6,6 +6,7 @@
 #include "topologica.h"
 #include "prim.h"
 #include "dijkstra.h"
+#include "estatisticas.h"
 
 int main() {
     Grafo* g = NULL;
@@ -60,7 +61,7 @@ int main() {
             printf("1-recursiva\n2-iterativa\n");
             scanf("%d", &escolha);
             if (escolha == 1) {
-                printf("Numero de componentes conexas: %d\n", buscaProfundidadeRecursiva(g));
+                printf("Numero de componentes conexas: %d\n", buscaProfundidadeRecursiva(g, 1));
             } else if (escolha == 2) {
                 printf("Numero de componentes conexas: %d\n", buscaProfundidadeIteratira(g));
             } else {
@@ -102,7 +103,38 @@ int main() {
             break;
         
         case 8:
+            if (!g) {
+                printf("Grafo nao carregado!\n");
+                break;
+            }
+            printf("Numero de vertices: %d\nNumero de arestas: %d\n\n", g->V, g->A);
+            
+            printf("Conexo? ");
+            if (conexo(g)) {
+                printf("sim\n\n");
+            } else {
+                printf("nao\n\n");
+            }
 
+            printf("Contem ciclo? ");
+            if (temCiclo(g)) {
+                printf("sim\n\n");
+            } else {
+                printf("nao\n\n");
+            }
+
+            grauDosVertices(g);
+            printf("\n");
+
+            printf("Densidade do grafo: %f\n\n", (float)(g->A) / (g->V * (g->V-1)));
+
+            printf("Direcionado? ");
+            if (direcionado(g)) {
+                printf("sim\n\n");
+            } else {
+                printf("nao\n\n");
+            }
+            
             break;
 
         case 9:

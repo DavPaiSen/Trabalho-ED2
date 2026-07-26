@@ -2,9 +2,11 @@
 #include "profundidade.h"
 #include <stdio.h>
 
-void ajudaRecursiva(Grafo* g, int* visitado, int atual) {
+void ajudaRecursiva(Grafo* g, int* visitado, int atual, int printar) {
     visitado[atual] = 1;
-    printf("%d ", atual);
+    if (printar) {
+        printf("%d ", atual);
+    }
 
     No* percorre = g->lista[atual];
 
@@ -12,13 +14,13 @@ void ajudaRecursiva(Grafo* g, int* visitado, int atual) {
         int vizinho = percorre->destino;
 
         if (!visitado[vizinho]) {
-            ajudaRecursiva(g, visitado, vizinho);
+            ajudaRecursiva(g, visitado, vizinho, printar);
         }
         percorre = percorre->prox;
     }
 }
 
-int buscaProfundidadeRecursiva(Grafo* g) { //retorna o numero de componentes conexas
+int buscaProfundidadeRecursiva(Grafo* g, int printar) { //retorna o numero de componentes conexas
     if (!g) {
         printf("Grafo nulo!!!!!\n");
         return 0;
@@ -29,13 +31,15 @@ int buscaProfundidadeRecursiva(Grafo* g) { //retorna o numero de componentes con
 
     for (int i = 0; i < g->V; i++) {
         if (!visitado[i]) {
-            ajudaRecursiva(g, visitado, i);
+            ajudaRecursiva(g, visitado, i, printar);
             componentesConexas++; //so vai passar aqui mais de uma vez se a primeira chamada da funcao auxiliar nao marcar todo mundo como visitado
         }
     }
 
     return(componentesConexas);
-    printf("\n");
+    if (printar) {
+        printf("\n");
+    }
     free(visitado);
 }
 
