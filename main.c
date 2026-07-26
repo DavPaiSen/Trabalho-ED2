@@ -5,13 +5,17 @@
 #include "largura.h"
 #include "topologica.h"
 #include "prim.h"
+#include "dijkstra.h"
 
 int main() {
     Grafo* g = NULL;
     int escolha = 0;
     int arquivo;
+    int origem, destino;
+    system("clear");
 
     while (escolha != 9) {
+        
         printf("=== SISTEMA DE GRAFOS ===\n1. Carregar grafo de arquivo\n2. Mostrar grafo (lista de adjacência)\n3. Busca em Profundidade (DFS)\n4. Busca em Largura (BFS)\n5. Ordenação Topológica\n6. Árvore Geradora Mínima (Prim)\n7. Menor Caminho (Dijkstra)\n8. Estatísticas do grafo\n9. Sair\n");
         scanf("%d", &escolha);
 
@@ -40,6 +44,10 @@ int main() {
             default:
                 printf("Entrada invalida!\n");
                 break;
+            }
+
+            if (g) {
+                printf("Grafo carregado com sucesso!\n");
             }
             break;
 
@@ -83,7 +91,14 @@ int main() {
             break;
         
         case 7:
-
+            printf("Digite o vertice de origem: "); scanf("%d", &origem);
+            printf("Digite o vertice de destino: "); scanf("%d", &destino);
+            int temp = dijkstra(g, origem, destino);
+            if (temp == -1) {
+                printf("Nao ha um caminho entre os dois vertices informados!\n");
+            } else {
+                printf("Distancia: %d\n", temp);
+            }
             break;
         
         case 8:
@@ -97,6 +112,14 @@ int main() {
             printf("Entrada invalida!\n");
             break;
         }
+
+        if (escolha != 9) {
+            printf("Pressione enter para continuar");
+            getchar();
+            getchar();
+            system("clear");
+        }
+        
     }
 
     desalocaGrafo(g);
