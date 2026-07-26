@@ -36,11 +36,12 @@ int buscaProfundidadeRecursiva(Grafo* g, int printar) { //retorna o numero de co
         }
     }
 
-    return(componentesConexas);
+    
     if (printar) {
         printf("\n");
     }
     free(visitado);
+    return(componentesConexas);
 }
 
 typedef struct {

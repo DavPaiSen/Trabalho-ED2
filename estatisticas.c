@@ -73,5 +73,8 @@ int temCiclo(Grafo* g) {
             return 1;
         }
     }
+
+    free(visitados);
+    free(recursao);
     return 0;
 }

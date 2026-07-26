@@ -8,44 +8,48 @@
 #include "dijkstra.h"
 #include "estatisticas.h"
 
-int main() {
+void main() {
     Grafo* g = NULL;
     int escolha = 0;
     int arquivo;
     int origem, destino;
-    system("clear");
+    char nomeArquivo[100];
+
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
 
     while (escolha != 9) {
         
         printf("=== SISTEMA DE GRAFOS ===\n1. Carregar grafo de arquivo\n2. Mostrar grafo (lista de adjacência)\n3. Busca em Profundidade (DFS)\n4. Busca em Largura (BFS)\n5. Ordenação Topológica\n6. Árvore Geradora Mínima (Prim)\n7. Menor Caminho (Dijkstra)\n8. Estatísticas do grafo\n9. Sair\n");
         scanf("%d", &escolha);
 
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
+
         switch (escolha) {
         case 1://carregar de arquivo
-            printf("Escolha o arquivo para carregar o grafo (1-4): ");
-            scanf("%d", &arquivo);
+            printf("Digite o nome do arquivo a ser carregado: ");
             
-            switch (arquivo) {
-            case 1:
-                g = grafoDoArquivo("grafo1.txt");
-                break;
+            if (scanf("%99s", nomeArquivo) == 1) {
+                    while ((c = getchar()) != '\n' && c != EOF);
 
-            case 2:
-                g = grafoDoArquivo("grafo2.txt");
-                break;
+                    if (g) {
+                        desalocaGrafo(g);
+                        g = NULL;
+                    }
 
-            case 3:
-                g = grafoDoArquivo("grafo3.txt");
+                    g = grafoDoArquivo(nomeArquivo);
+
+                    if (g) {
+                        printf("\nGrafo carregado com sucesso\n");
+                    } else {
+                        printf("\nErro ao abrir ou ler o arquivo\n");
+                    }
+                }
                 break;
-            
-            case 4:
-                g = grafoDoArquivo("grafo4.txt");
-                break;
-            
-            default:
-                printf("Entrada invalida!\n");
-                break;
-            }
 
             if (g) {
                 printf("Grafo carregado com sucesso!\n");
@@ -147,9 +151,13 @@ int main() {
 
         if (escolha != 9) {
             printf("Pressione enter para continuar");
+            while ((c = getchar()) != '\n' && c != EOF);
             getchar();
-            getchar();
-            system("clear");
+            #ifdef _WIN32
+                system("cls");
+            #else
+                system("clear");
+            #endif
         }
         
     }
