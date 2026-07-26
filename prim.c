@@ -62,5 +62,6 @@ int prim(Grafo* g) {
     }
 
     free(verticesInclusos);
+    free(arvore);
     return pesoArvore;
 }
