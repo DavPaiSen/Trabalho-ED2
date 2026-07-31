@@ -110,4 +110,5 @@ int buscaProfundidadeIteratira(Grafo* g) {
     printf("\n");
     free(visitado);
     liberaPilha(p);
+    return componentesConexas;
 }
